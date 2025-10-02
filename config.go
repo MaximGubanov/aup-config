@@ -56,12 +56,17 @@ func (c *Config) GetArcInDir() string {
 	return arcInDir
 }
 
+func (c *Config) GetArcOutDir() string {
+	arcOutDir := filepath.Join(c.execDir, "..", c.Directories.AupDir[2], "Out", "", "/")
+	return arcOutDir
+}
+
 func (c *Config) GetOkDir() string {
-	okDir := filepath.Join(c.execDir, "..", c.Directories.AupDir[2], c.Directories.AupDir[3], "OK", "/")
+	okDir := filepath.Join(c.execDir, "..", c.Directories.AupDir[2], "Out", "OK", "/")
 	return okDir
 }
 
 func (c *Config) GetOwDir() string {
-	owDir := filepath.Join(c.execDir, "..", c.Directories.AupDir[2], c.Directories.AupDir[3], "OW", "/")
+	owDir := filepath.Join(c.execDir, "..", c.Directories.AupDir[2], "Out", "OW", "/")
 	return owDir
 }

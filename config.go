@@ -3,7 +3,6 @@
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"os"
 	"path/filepath"
 )
@@ -30,8 +29,8 @@ type Config struct {
 	execDir string
 }
 
-func NewConfig(filename, execDir string) (*Config, error) {
-	data, err := os.ReadFile(filepath.Join(execDir, filename))
+func NewConfig(execDir, filename string) (*Config, error) {
+	data, err := os.ReadFile(filename)
 	if err != nil {
 		return nil, errors.New("ошибка открытия конфигурационного файла")
 	}
@@ -48,29 +47,21 @@ func NewConfig(filename, execDir string) (*Config, error) {
 }
 
 func (c *Config) GetLogDir() string {
-	logDir := filepath.Join(c.execDir, "../", c.Directories.LogDir[2], "/")
+	logDir := filepath.Join(c.execDir, "..", c.Directories.LogDir[2], "/")
 	return logDir
 }
 
 func (c *Config) GetArcInDir() string {
-	arcInDir := filepath.Join(c.execDir, "../", c.Directories.AupDir[2], c.Directories.AupDir[3], "/")
+	arcInDir := filepath.Join(c.execDir, "..", c.Directories.AupDir[2], c.Directories.AupDir[3], "/")
 	return arcInDir
 }
 
-func (c *Config) GetOkDir() (string, error) {
-	okDir := filepath.Join(c.execDir, "../", c.Directories.AupDir[2], c.Directories.AupDir[3], "OK", "/")
-	if okDir == "" {
-		return "", fmt.Errorf("не существующий путь: %s", "Arc/In/OK/")
-	}
-
-	return okDir, nil
+func (c *Config) GetOkDir() string {
+	okDir := filepath.Join(c.execDir, "..", c.Directories.AupDir[2], c.Directories.AupDir[3], "OK", "/")
+	return okDir
 }
 
-func (c *Config) GetOwDir() (string, error) {
-	owDir := filepath.Join(c.execDir, "../", c.Directories.AupDir[2], c.Directories.AupDir[3], "OW", "/")
-	if owDir == "" {
-		return "", fmt.Errorf("не существующий путь: %s", "Arc/In/OW/")
-	}
-
-	return owDir, nil
+func (c *Config) GetOwDir() string {
+	owDir := filepath.Join(c.execDir, "..", c.Directories.AupDir[2], c.Directories.AupDir[3], "OW", "/")
+	return owDir
 }

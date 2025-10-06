@@ -3,16 +3,14 @@
 import (
 	"fmt"
 	"os"
-	"path/filepath"
 
 	"github.com/MaximGubanov/aup-config"
 )
 
 func main() {
-	execPath, _ := os.Executable()
-	execDir := filepath.Dir(execPath)
+	execDir, err := os.Getwd()
 	fmt.Printf("%s\n", execDir)
-	cfg, err := aup_config.NewConfig("../sgs.json", execDir)
+	cfg, err := aup_config.NewConfig(execDir, "../sgs.json")
 	if err != nil {
 		panic(err)
 	}

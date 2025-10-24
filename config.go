@@ -15,9 +15,15 @@ type service struct {
 	LogLevel string `json:"LogLevel"`
 }
 
+type WatcherService struct {
+	service      `json:"WatcherService"`
+	RetryTimeout int `json:"RetryTimeout"`
+}
+
 type Config struct {
 	Services struct {
-		Watcher    service `json:"WatcherService"`
+		//Watcher    service `json:"WatcherService"`
+		Watcher    WatcherService
 		Validator  service `json:"ValidatorService"`
 		DbWriter   service `json:"DbWriterService"`
 		SMTHandler service `json:"SMTHandler"`

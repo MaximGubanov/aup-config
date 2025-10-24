@@ -15,12 +15,9 @@ type service struct {
 	LogLevel string `json:"LogLevel"`
 }
 
-type RetryTimeout int
-
 type WatcherService struct {
-	service
-	RetryTimeout `json:"RetryTimeout"`
-	//RetryTimeout int `json:"RetryTimeout"`
+	service      `json:",inline"`
+	RetryTimeout int `json:"RetryTimeout"`
 }
 
 type Config struct {

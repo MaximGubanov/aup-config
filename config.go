@@ -16,17 +16,17 @@ type service struct {
 }
 
 type WatcherService struct {
-	service      `json:"WatcherService"`
+	service
 	RetryTimeout int `json:"RetryTimeout"`
 }
 
 type Config struct {
 	Services struct {
 		//Watcher    service `json:"WatcherService"`
-		Watcher    WatcherService
-		Validator  service `json:"ValidatorService"`
-		DbWriter   service `json:"DbWriterService"`
-		SMTHandler service `json:"SMTHandler"`
+		Watcher    WatcherService `json:"WatcherService"`
+		Validator  service        `json:"ValidatorService"`
+		DbWriter   service        `json:"DbWriterService"`
+		SMTHandler service        `json:"SMTHandler"`
 	} `json:"GrpcServer"`
 	Directories struct {
 		LogDir []string `json:"LogDir"`

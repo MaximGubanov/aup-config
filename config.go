@@ -22,7 +22,6 @@ type WatcherService struct {
 
 type Config struct {
 	Services struct {
-		//Watcher    service `json:"WatcherService"`
 		Watcher    WatcherService `json:"WatcherService"`
 		Validator  service        `json:"ValidatorService"`
 		DbWriter   service        `json:"DbWriterService"`
@@ -75,4 +74,9 @@ func (c *Config) GetOkDir() string {
 func (c *Config) GetOwDir() string {
 	owDir := filepath.Join(c.execDir, "..", c.Directories.AupDir[2], "Out", "OW", "/")
 	return owDir
+}
+
+func (c *Config) GetRespDir() string {
+	respDir := filepath.Join(c.execDir, "..", c.Directories.AupDir[2], "Resp", "/")
+	return respDir
 }

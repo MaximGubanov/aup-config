@@ -52,31 +52,31 @@ func NewConfig(execDir, filename string) (*Config, error) {
 }
 
 func (c *Config) GetLogDir() string {
-	logDir := filepath.Join(c.execDir, "..", c.Directories.LogDir[2], "/")
+	logDir := filepath.Join(c.execDir, c.Directories.LogDir[2], "/")
 	return logDir
 }
 
 func (c *Config) GetArcInDir() string {
-	arcInDir := filepath.Join(c.execDir, "..", c.Directories.AupDir[2], c.Directories.AupDir[3], "/")
+	arcInDir := filepath.Join(c.execDir, c.Directories.AupDir[2], c.Directories.AupDir[3], "/")
 	return arcInDir
 }
 
 func (c *Config) GetArcOutDir() string {
-	arcOutDir := filepath.Join(c.execDir, "..", c.Directories.AupDir[2], "Out", "", "/")
+	arcOutDir := filepath.Join(c.execDir, c.Directories.AupDir[2], "Out", "", "/")
 	return arcOutDir
 }
 
 func (c *Config) GetOkDir() string {
-	okDir := filepath.Join(c.execDir, "..", c.Directories.AupDir[2], "Out", "OK", "/")
+	okDir := filepath.Join(c.execDir, c.Directories.AupDir[2], "Out", "OK", "/")
 	return okDir
 }
 
 func (c *Config) GetOwDir() string {
-	owDir := filepath.Join(c.execDir, "..", c.Directories.AupDir[2], "Out", "OW", "/")
+	owDir := filepath.Join(c.execDir, c.Directories.AupDir[2], "Out", "OW", "/")
 	return owDir
 }
 
 func (c *Config) GetRespDir() string {
-	respDir := filepath.Join(c.execDir, "..", c.Directories.AupDir[2], "Resp", "/")
+	respDir := filepath.Join(c.execDir, c.Directories.AupDir[2], "Resp", "/")
 	return respDir
 }

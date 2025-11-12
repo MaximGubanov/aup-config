@@ -35,15 +35,15 @@ type Config struct {
 }
 
 func NewConfig() (*Config, error) {
-	exePath, err := os.Executable()
-	workDir := filepath.Dir(exePath)
+	executable, err := os.Executable()
+	workDir := filepath.Dir(executable)
 	data, err := os.ReadFile(filepath.Join(workDir, "..", "sgs.json"))
 	if err != nil {
 		return nil, errors.New("ошибка открытия конфигурационного файла")
 	}
 
 	var config Config
-	config.workDir = workDir
+	config.workDir = filepath.Join(workDir, "..")
 
 	err = json.Unmarshal(data, &config)
 	if err != nil {

@@ -42,7 +42,7 @@ func NewConfig() (*Config, error) {
 	}
 
 	var config Config
-	config.WorkDir = filepath.Join(wd, "..")
+	config.WorkDir = wd //filepath.Join(wd, "..")
 
 	data, err := os.ReadFile(filepath.Join(config.WorkDir, "sgs.json"))
 	if err != nil {

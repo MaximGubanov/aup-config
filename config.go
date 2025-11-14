@@ -3,6 +3,7 @@
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"os"
 	"path/filepath"
 )
@@ -35,11 +36,14 @@ type Config struct {
 }
 
 func NewConfig() (*Config, error) {
-	executable, err := os.Executable()
+	//executable, err := os.Executable()
+	//workDir := filepath.Dir(executable)
+	executable, err := os.Getwd()
 	workDir := filepath.Dir(executable)
-	data, err := os.ReadFile(filepath.Join(workDir, "..", "sgs.json"))
+	fmt.Println("Определение рабочей директории" + workDir)
+	data, err := os.ReadFile(filepath.Join(workDir, "sgs.json"))
 	if err != nil {
-		return nil, errors.New("ошибка открытия конфигурационного файла")
+		return nil, errors.New("не найден файл по пути: " + filepath.Join(workDir, "sgs.json"))
 	}
 
 	var config Config

@@ -3,6 +3,7 @@
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"os"
 	"path/filepath"
 )
@@ -41,8 +42,9 @@ func NewConfig() (*Config, error) {
 		return nil, err
 	}
 
+	fmt.Printf("ghghghghgghgh")
 	var config Config
-	config.WorkDir = wd //filepath.Join(wd, "..")
+	config.WorkDir = filepath.Join(wd, "..")
 
 	data, err := os.ReadFile(filepath.Join(config.WorkDir, "sgs.json"))
 	if err != nil {

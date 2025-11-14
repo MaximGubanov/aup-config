@@ -3,7 +3,6 @@
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"os"
 	"path/filepath"
 )
@@ -36,22 +35,23 @@ type Config struct {
 }
 
 func NewConfig() (*Config, error) {
-	//executable, err := os.Executable()
-	//workDir := filepath.Dir(executable)
-	executable, err := os.Getwd()
-	workDir := filepath.Dir(executable)
-	fmt.Println("Определение рабочей директории" + workDir)
-	data, err := os.ReadFile(filepath.Join(workDir, "sgs.json"))
+	wd, err := os.Getwd()
+	err = os.Chdir(wd)
 	if err != nil {
-		return nil, errors.New("не найден файл по пути: " + filepath.Join(workDir, "sgs.json"))
+		return nil, err
 	}
 
 	var config Config
-	config.WorkDir = filepath.Join(workDir, "..")
+	config.WorkDir = filepath.Join(wd, "..")
+
+	data, err := os.ReadFile(filepath.Join(config.WorkDir, "sgs.json"))
+	if err != nil {
+		return nil, errors.New("не найден файл по пути: " + filepath.Join(config.WorkDir, "sgs.json"))
+	}
 
 	err = json.Unmarshal(data, &config)
 	if err != nil {
-		return nil, errors.New("ошибка преобразования конфигурационного файла из json")
+		return nil, errors.New("ошибка десериализации конфигурационного файла sgs.json")
 	}
 
 	return &config, nil
@@ -68,7 +68,7 @@ func (c *Config) GetArcInDir() string {
 }
 
 func (c *Config) GetArcOutDir() string {
-	arcOutDir := filepath.Join(c.WorkDir, c.Directories.AupDir[2], "Out", "", "/")
+	arcOutDir := filepath.Join(c.WorkDir, c.Directories.AupDir[2], "Out", "/")
 	return arcOutDir
 }
 
